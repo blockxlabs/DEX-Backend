@@ -1,0 +1,11 @@
+{
+  "name": "dex-backend",
+  "version": "1.0.0",
+  "description": "Backend for DEX prototype",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Hamza Qaisrani, Kuntesh Patel",
+  "license": "ISC"
+}
