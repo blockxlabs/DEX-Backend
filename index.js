@@ -62,3 +62,105 @@ function productList(req, res, next) {
     },
   );
 }
+
+// Route for getting all the product
+app.get('/orders/:user_id', orderList);
+
+// Callback
+function orderList(req, res, next) {
+  var user_id = Number(req.params.user_id);
+  connection.query(
+    'SELECT * FROM order_coin where User_Id =?',
+    [user_id],
+    (err, rows) => {
+      if (err) throw err;
+      res.send(rows);
+    },
+  );
+}
+
+app.post('/purchase', urlencodedParser, purchase);
+
+function purchase(req, res, next) {
+  console.log('posting');
+  var id = req.body.Product_Id;
+  connection.query(
+    'select * from stock WHERE Product_Id = ?',
+    [id],
+    (err, result) => {
+      if (err) throw err;
+      var stock = result[0].quantity;
+
+      if (stock > req.body.Quantity) {
+        const order = {
+          User_Id: req.body.User_Id,
+          Product_Id: req.body.Product_Id,
+          Quantity: req.body.Quantity,
+          Order_Type: 1,
+          price: req.body.price,
+        };
+
+        stock = stock - req.body.Quantity;
+        console.log(stock);
+        connection.query(
+          'UPDATE stock SET quantity = ?  Where Product_Id = ?',
+          [stock, id],
+          (err, result) => {
+            if (err) throw err;
+            console.log('Updated');
+          },
+        );
+
+        connection.query(
+          'INSERT INTO order_coin SET ?',
+          order,
+          (err, result) => {
+            if (err) throw err;
+
+            res.send('buy');
+          },
+        );
+      }
+    },
+  );
+}
+
+app.post('/sell', urlencodedParser, purchase);
+
+function purchase(req, res, next) {
+  console.log('posting');
+  var id = req.body.Product_Id;
+  connection.query(
+    'select * from stock WHERE Product_Id = ?',
+    [id],
+    (err, result) => {
+      if (err) throw err;
+      var stock = result[0].quantity;
+
+      const order = {
+        User_Id: req.body.User_Id,
+        Product_Id: req.body.Product_Id,
+        Quantity: req.body.Quantity,
+        Order_Type: 2,
+        price: req.body.price,
+      };
+
+      stock = stock + req.body.Quantity;
+      console.log(stock);
+      connection.query(
+        'UPDATE stock SET quantity = ?  Where Product_Id = ?',
+        [stock, id],
+        (err, result) => {
+          if (err) throw err;
+          console.log('Updated');
+        },
+      );
+
+      connection.query('INSERT INTO order_coin SET ?', order, (err, result) => {
+        if (err) throw err;
+
+        res.send('sell');
+      });
+    },
+  );
+}
