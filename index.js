@@ -2,7 +2,7 @@
 
 var express = require('express');
 var mysql = require('mysql');
-const cors = require('cors');
+var cors = require('cors');
 var app = express();
 var server = app.listen(8000);
 app.use(cors());
@@ -46,16 +46,13 @@ connection.connect(err => {
   console.log('Connected!');
 });
 
-// Declare User ID
-var user_id = 1;
-
 // Route for getting all the product
 app.get('/products', productList);
 
 // Callback
 function productList(req, res, next) {
   connection.query(
-    'SELECT product.Id,product.name,product.logo,stock.quantity FROM `product` join stock on product.Id = stock.Product_Id',
+    'SELECT product.Id,product.name,product.logo,stock.quantity, product.price FROM `product` join stock on product.Id = stock.Product_Id',
     (err, rows) => {
       if (err) throw err;
       res.send(rows);
