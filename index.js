@@ -4,7 +4,7 @@ var express = require('express');
 var mysql = require('mysql');
 const cors = require('cors');
 var app = express();
-var server = app.listen(8080);
+var server = app.listen(8000);
 app.use(cors());
 app.use(function(req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
@@ -70,7 +70,7 @@ app.get('/orders/:user_id', orderList);
 function orderList(req, res, next) {
   var user_id = Number(req.params.user_id);
   connection.query(
-    'SELECT * FROM order_coin where User_Id =?',
+    'SELECT order_coin.*, product.name,product.logo from order_coin join product on product.Id = order_coin.Product_Id where User_Id =?',
     [user_id],
     (err, rows) => {
       if (err) throw err;
