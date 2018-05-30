@@ -12,7 +12,7 @@ export default (sequelize, DataTypes) => {
   });
 
   User.associate = models => {
-    User.hasMany(models.Order, { as: 'Orders' });
+    User.hasMany(models.CoinOrder, { as: 'CoinOrders' });
   };
 
   return User;

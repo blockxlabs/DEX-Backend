@@ -13,7 +13,7 @@ const sequelize = new Sequelize('blockx-dex', 'root', '', {
 // Import Models
 const models = {
   User: sequelize.import('./user'),
-  Order: sequelize.import('./order'),
+  CoinOrder: sequelize.import('./coinOrder'),
   Product: sequelize.import('./product'),
   Stock: sequelize.import('./stock'),
 };
