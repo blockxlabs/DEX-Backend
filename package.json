@@ -1,20 +1,25 @@
 {
-  "name": "dex-backend",
+  "name": "dex-backend-sequelize",
   "version": "1.0.0",
-  "description": "Backend for DEX prototype",
+  "description": "Backend for DEX prototype app",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js"
+    "start": "nodemon --exec babel-node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Hamza Qaisrani, Kuntesh Patel",
   "license": "ISC",
   "dependencies": {
-    "axios": "^0.18.0",
     "body-parser": "^1.18.2",
     "cors": "^2.8.4",
     "express": "^4.16.2",
-    "mysql": "^2.15.0",
-    "whatwg-fetch": "^2.0.4"
+    "mysql2": "^1.5.3",
+    "sequelize": "^4.33.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-stage-3": "^6.24.1",
+    "nodemon": "^1.14.12"
   }
 }
