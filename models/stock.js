@@ -7,5 +7,8 @@ export default (sequelize, DataTypes) => {
 
   // Add Associations
 
+  Stock.associate = models => {
+    Stock.hasOne(models.Product, { as: 'Product_Stock' });
+  };
   return Stock;
 };

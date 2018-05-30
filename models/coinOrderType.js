@@ -1,7 +1,7 @@
 export default (sequelize, DataTypes) => {
   const CoinOrderType = sequelize.define('coinOrderType', {
-    type: DataType.STRING,
+    type: DataTypes.STRING,
   });
 
-  return CoinOrder;
+  return CoinOrderType;
 };

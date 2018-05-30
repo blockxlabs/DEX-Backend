@@ -1,0 +1,10 @@
+
+
+INSERT INTO `users` (`id`, `email`, `password`, `createdAt`, `updatedAt`) VALUES (NULL, 'test@gmail.com', 'test@1234', '2018-05-30 00:00:00', '2018-05-30 00:00:00');
+
+INSERT INTO `products` (`id`, `name`, `logo`, `quantity`, `price`, `createdAt`, `updatedAt`) VALUES (NULL, 'Lite Coin', 'litecoin.jpg', '1000', '125', '2018-05-30 00:00:00', '2018-05-30 00:00:00');
+
+
+INSERT INTO `coinordertypes` (`id`, `type`, `createdAt`, `updatedAt`) VALUES (NULL, 'BUY', '2018-05-30 00:00:00', '2018-05-30 00:00:00'), (NULL, 'SELL', '2018-05-30 00:00:00', '2018-05-30 00:00:00');
+
+INSERT INTO `coinorders` (`id`, `quantity`, `price`, `createdAt`, `updatedAt`, `userId`, `productId`, `coinOrderTypeId`) VALUES (NULL, '10', '1250', '2018-05-30 00:00:00', '2018-05-30 00:00:00', '1', '1', '1');

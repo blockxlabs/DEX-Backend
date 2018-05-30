@@ -4,9 +4,7 @@ export default (sequelize, DataTypes) => {
     price: DataTypes.DECIMAL,
   });
 
-  // CoinOrder.associate = models => {
-  //   CoinOrder.hasMany(models.CoinOrder, { as: 'CoinOrders' });
-  // };
+  
 
   return CoinOrder;
 };

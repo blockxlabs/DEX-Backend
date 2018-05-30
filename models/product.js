@@ -10,7 +10,5 @@ export default (sequelize, DataTypes) => {
     },
   });
 
-  // Add Associations
-
   return Product;
 };

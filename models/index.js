@@ -12,7 +12,7 @@ const models = {
   User: sequelize.import('./user'),
   CoinOrder: sequelize.import('./coinOrder'),
   Product: sequelize.import('./product'),
-  Stock: sequelize.import('./stock'),
+  CoinOrderType: sequelize.import('./coinOrderType'),
 };
 
 // Loop Through Models and set up Associations
