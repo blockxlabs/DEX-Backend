@@ -12,8 +12,8 @@ app.use(cors({ origin: 'http://localhost:8000' }));
 app.use(bodyParser.json());
 
 // Run server
-models.sequelize.sync({}).then(() => {
-  app.listen(4000, () => {
+models.sequelize.sync({ force: true }).then(() => {
+  app.listen(8000, () => {
     console.log('Server is running on port 8000...');
   });
 });

@@ -1,13 +1,10 @@
 import Sequelize from 'sequelize';
 
 // Setup Sequelize
-const sequelize = new Sequelize('blockx-dex', 'root', '', {
+const sequelize = new Sequelize('blockx_backend', 'root', '', {
   host: 'localhost',
   dialect: 'mysql',
   operatorsAliases: Sequelize.Op,
-  define: {
-    underscored: true,
-  },
 });
 
 // Import Models
