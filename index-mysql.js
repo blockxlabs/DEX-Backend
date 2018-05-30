@@ -1,7 +1,7 @@
 // Using express: http://expressjs.com/
 
 var express = require('express');
-var mysql = require('mysql');
+var mysql = require('mysql2');
 var cors = require('cors');
 var app = express();
 var server = app.listen(8000);
