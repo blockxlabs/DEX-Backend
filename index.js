@@ -13,38 +13,8 @@ import product from './models/product';
 // Initialize express
 const app = express();
 const allowedOrigins = ['http://localhost:8000'];
-app.use(function(req, res, next) {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header(
-    'Access-Control-Allow-Headers',
-    'Origin, X-Requested-With, Content-Type, Accept',
-  );
-  next();
-});
-app.use(
-  cors({
-    origin: function(origin, callback) {
-      // allow requests with no origin
-      // (like mobile apps or curl requests)
-      if (!origin) return callback(null, true);
-
-      if (allowedOrigins.indexOf(origin) === -1) {
-        var msg =
-          'The CORS policy for this site does not ' +
-          'allow access from the specified Origin.';
-        return callback(new Error(msg), false);
-      }
-
-      return callback(null, true);
-    },
-  }),
-);
-
+app.use(cors({ allowedOrigins }));
 app.use(bodyParser.json());
-
-models.CoinOrder.belongsTo(models.User);
-models.CoinOrder.belongsTo(models.Product);
-models.CoinOrder.belongsTo(models.CoinOrderType);
 
 // Run server
 models.sequelize.sync({}).then(() => {
@@ -53,16 +23,17 @@ models.sequelize.sync({}).then(() => {
   });
 });
 
-// create a user
+// Create a user
 app.post('/api/users', (req, res) => {
   User.create(req.body).then(user => res.json(user));
 });
 
+// Get Users
 app.get('/api/users', (req, res) => {
   models.User.findAll().then(users => res.json(users));
 });
 
-// find orders belonging to one user or all orders
+// Find orders belonging to one user or all orders
 app.get('/api/orders/:userId?', (req, res) => {
   let query;
   if (req.params.userId) {
@@ -81,9 +52,8 @@ app.get('/api/orders/:userId?', (req, res) => {
   return query.then(orders => res.json(orders));
 });
 
-// find orders belonging to one user or all orders
+// Find Product
 app.get('/api/products', (req, res) => {
   let query = models.Product.findAll();
-
   return query.then(products => res.json(products));
 });
